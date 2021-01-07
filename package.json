@@ -1,0 +1,118 @@
+{
+	"name": "bebar-vscode",
+	"displayName": "bebar",
+	"publisher": "oYo-fr",
+	"description": "",
+	"version": "0.0.4",
+	"repository": {
+		"type" : "git",
+		"url" : "https://github.com/oYo-fr/bebar-vscode"
+	},
+	"engines": {
+		"vscode": "^1.52.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onView:bebarExplorer"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "bebar.open",
+				"title": "Open"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "bebar-explorer",
+					"title": "Bebar Explorer",
+					"icon": "resources/dark/beard.svg"
+				}
+			]
+		},
+		"views": {
+			"bebar-explorer": [
+				{
+					"id": "bebarExplorer",
+					"name": "Bebar Explorer",
+					"contextualTitle": "Bebar Explorer",
+					"visibility": "hidden"
+				},
+				{
+					"id": "bebarExplorer-templates",
+					"name": "Templates",
+					"contextualTitle": "Templates",
+					"visibility": "visible"
+				},
+				{
+					"id": "bebarExplorer-outputs",
+					"name": "Outputs",
+					"contextualTitle": "Outputs",
+					"visibility": "visible"
+				},
+				{
+					"id": "bebarExplorer-data",
+					"name": "Data",
+					"contextualTitle": "Data",
+					"visibility": "visible"
+				},
+				{
+					"id": "bebarExplorer-partials",
+					"name": "Partials",
+					"contextualTitle": "Partials"
+				},
+				{
+					"id": "bebarExplorer-helpers",
+					"name": "Helpers",
+					"contextualTitle": "Helpers"
+				},
+				{
+					"id": "bebarExplorer-next",
+					"name": "Next bebars",
+					"contextualTitle": "Next bebars"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "bebar.open",
+					"when": "view == bebarExplorer"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile && yarn run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"format": "prettier --write ./src/**/*.ts",
+		"upgrade": "yarn upgrade",
+		"upgrade Bebar": "yarn upgrade bebar"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.52.0",
+		"@typescript-eslint/eslint-plugin": "^4.9.0",
+		"@typescript-eslint/parser": "^4.9.0",
+		"eslint": "^7.15.0",
+		"eslint-plugin-prettier": "^3.0.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.1.2",
+		"vscode-test": "^1.4.1"
+	},
+	"dependencies": {
+		"bebar": "^0.1.55",
+		"handlebars": "^4.7.6"
+	}
+}

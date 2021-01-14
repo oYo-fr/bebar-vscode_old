@@ -1,7 +1,6 @@
 import { Bebar, Helper } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
-import * as path from "path";
 import { BebarHelperNode } from "./BebarHelperNode";
 
 export class BebarHelpersNode extends BebarNode {
@@ -13,26 +12,6 @@ export class BebarHelpersNode extends BebarNode {
   ) {
     super("Helpers", context, bebar, collapsibleState);
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "cog.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "cog.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
     let result: BebarNode[] = [];

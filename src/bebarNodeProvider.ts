@@ -47,7 +47,7 @@ export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
   }
 
   public async getRoot(filter: string = ""): Promise<BebarNode[]> {
-    if (!this.bebarParser.bebar) {
+    if (!this.bebarParser || !this.bebarParser.bebar) {
       return [];
     }
     switch (filter) {

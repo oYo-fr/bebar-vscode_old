@@ -13,26 +13,6 @@ export class BebarOutputsNode extends BebarNode {
   ) {
     super("Outputs", context, bebar, collapsibleState);
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "folder.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "folder.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
     const result: BebarNode[] = [];

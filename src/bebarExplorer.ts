@@ -1,9 +1,7 @@
 import * as vscode from "vscode";
 import { BebarFilteredNodeProvider } from "./bebarFilteredNodeProvider";
 import { BebarNodeProvider } from "./bebarNodeProvider";
-import { Logger } from "./Logger";
 import { OutputProvider } from "./OutputProvider";
-import { BebarOutputNode } from "./treenodes/BebarOutputNode";
 
 export class BebarExplorer {
   public dataProvider: BebarNodeProvider;
@@ -18,22 +16,21 @@ export class BebarExplorer {
   constructor(context: vscode.ExtensionContext) {
     this.treeDataProvider = new BebarNodeProvider();
     this.dataProvider = this.treeDataProvider;
-    //this.treeDataProvider.load(file);
-    context.subscriptions.push(
-      vscode.window.createTreeView("bebarExplorer", {
-        treeDataProvider: this.treeDataProvider,
-      })
-    );
 
     this.outputsBebarFilteredNodeProvider = new BebarFilteredNodeProvider(
       this.treeDataProvider,
       "outputs"
     );
     context.subscriptions.push(
-      vscode.window.createTreeView("bebarExplorer-outputs", {
+      vscode.window.createTreeView("bebarExplorer", {
         treeDataProvider: this.outputsBebarFilteredNodeProvider,
       })
     );
+    // context.subscriptions.push(
+    //   vscode.window.createTreeView("bebarExplorer-outputs", {
+    //     treeDataProvider: this.outputsBebarFilteredNodeProvider,
+    //   })
+    // );
 
     this.dataBebarFilteredNodeProvider = new BebarFilteredNodeProvider(
       this.treeDataProvider,

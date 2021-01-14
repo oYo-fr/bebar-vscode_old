@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import * as path from "path";
 import { Bebar } from "bebar";
 
 export class BebarNode extends vscode.TreeItem {

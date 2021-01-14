@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import { BebarNodeProvider } from "./bebarNodeProvider";
-import { Logger } from "./Logger";
 
 export class OutputProvider implements vscode.TextDocumentContentProvider {
   public static readonly instance: OutputProvider = new OutputProvider();

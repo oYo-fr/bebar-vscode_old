@@ -1,7 +1,6 @@
 import { Bebar } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
-import * as path from "path";
 
 export class BebarObjectNode extends BebarNode {
   constructor(

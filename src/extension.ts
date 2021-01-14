@@ -35,8 +35,11 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.onDidChangeTextDocument(async (event) => {
       if (
         event.contentChanges.length > 0 &&
-        bebarExplorer.dataProvider.bebarParser.bebar &&
-        !event.document.fileName.startsWith("extension-output-")
+        !event.document.fileName.startsWith("extension-output-") &&
+        bebarExplorer &&
+        bebarExplorer.dataProvider &&
+        bebarExplorer.dataProvider.bebarParser &&
+        bebarExplorer.dataProvider.bebarParser.bebar
       ) {
         try {
           const refreshHandled = await bebarExplorer.dataProvider.bebarParser.HandleRefresh(
@@ -50,6 +53,8 @@ export function activate(context: vscode.ExtensionContext) {
             await bebarExplorer.dataProvider.refreshView();
             await OutputProvider.instance.refresh();
             Logger.log("Event handled -> Refresh done");
+
+            await bebarExplorer.refresh();
           }
         } catch (e) {
           Logger.log("An error occured while refreshing templates" + e);

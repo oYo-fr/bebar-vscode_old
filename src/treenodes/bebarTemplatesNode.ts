@@ -1,7 +1,6 @@
 import { Bebar, Template } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
-import * as path from "path";
 import { BebarTemplateNode } from "./bebarTemplateNode";
 
 export class BebarTemplatesNode extends BebarNode {
@@ -13,30 +12,10 @@ export class BebarTemplatesNode extends BebarNode {
   ) {
     super("Templates", context, bebar, collapsibleState);
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "templates.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "templates.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
     const result: BebarNode[] = [];
-    (this.context as Template[]).map((tFile) =>
+    this.context.map((tFile) =>
       result.push(new BebarTemplateNode(tFile, this.bebar))
     );
     return result;

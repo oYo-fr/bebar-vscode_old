@@ -1,4 +1,4 @@
-import { Bebar, Template } from "bebar";
+import { Bebar } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
 import * as path from "path";
@@ -31,34 +31,18 @@ export class BebarNextNode extends BebarFileNode {
     this.tooltip = `${this.label} (${relativePath})`;
     this.description = `(${relativePath})`;
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "play.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "play.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
-    return [
-      new BebarDataListNode(this.bebar.data, this.bebar),
-      new BebarHelpersNode(this.bebar.helpers, this.bebar),
-      new BebarPartialsNode(this.bebar.partials, this.bebar),
-      new BebarTemplatesNode(this.bebar.templates, this.bebar),
-      new BebarNextListNode(this.bebar.nextBebars, this.bebar),
-    ];
+    if (this.bebar) {
+      return [
+        new BebarDataListNode(this.bebar.data, this.bebar),
+        new BebarHelpersNode(this.bebar.helpers, this.bebar),
+        new BebarPartialsNode(this.bebar.partials, this.bebar),
+        new BebarTemplatesNode(this.bebar.templates, this.bebar),
+        new BebarNextListNode(this.bebar.nextBebars, this.bebar),
+      ];
+    } else {
+      return [];
+    }
   }
 }

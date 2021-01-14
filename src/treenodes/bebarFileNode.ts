@@ -30,24 +30,4 @@ export class BebarFileNode extends BebarNode {
       },
     ],
   };
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "file.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "file.svg"
-    ),
-  };
 }

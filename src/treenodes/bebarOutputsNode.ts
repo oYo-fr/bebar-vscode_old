@@ -1,7 +1,6 @@
 import { Bebar, Output } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
-import * as path from "path";
 import { BebarOutputNode } from "./BebarOutputNode";
 
 export class BebarOutputsNode extends BebarNode {
@@ -13,26 +12,6 @@ export class BebarOutputsNode extends BebarNode {
   ) {
     super("Outputs", context, bebar, collapsibleState);
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "folder.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "folder.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
     const result: BebarNode[] = [];

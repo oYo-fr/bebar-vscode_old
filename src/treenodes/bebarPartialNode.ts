@@ -19,26 +19,6 @@ export class BebarPartialNode extends BebarFileNode {
     this.tooltip = `${this.label} (${relativePath})`;
     this.description = `(${relativePath})`;
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "partial.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "partial.svg"
-    ),
-  };
 
   getChildren(): BebarNode[] {
     return [];

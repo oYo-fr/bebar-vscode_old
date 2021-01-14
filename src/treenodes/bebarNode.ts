@@ -1,19 +1,18 @@
 import * as vscode from "vscode";
-import * as path from "path";
 import { Bebar } from "bebar";
 
 export class BebarNode extends vscode.TreeItem {
   constructor(
     public readonly label: string,
-    public readonly context: any,
-    public readonly bebar: Bebar,
+    public readonly context?: any,
+    public readonly bebar?: Bebar,
     public readonly collapsibleState: vscode.TreeItemCollapsibleState = vscode
       .TreeItemCollapsibleState.Collapsed,
     public readonly command?: vscode.Command
   ) {
     super(label, collapsibleState);
 
-    if (Array.isArray(context)) {
+    if (context && Array.isArray(context)) {
       this.tooltip = `${this.label} (${context.length})`;
       this.description = `(${context.length})`;
     } else {

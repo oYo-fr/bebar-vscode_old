@@ -12,33 +12,17 @@ export class BebarOutputNode extends BebarNode {
       .TreeItemCollapsibleState.None
   ) {
     super(
-      `${preLabel}./` +
-        path.relative(bebar.workingDir, context.file).replace(/\\/gi, "/"),
+      `${preLabel}` + path.parse(context.file).base,
       context as any,
       bebar,
       collapsibleState
     );
+
+    const relativePath = path.dirname(
+      path.relative(bebar.workingDir, context.file).replace(/\\/gi, "/")
+    );
+    this.description = `(./${relativePath})`;
   }
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "file.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "file.svg"
-    ),
-  };
 
   command = {
     command: "vscode.open",

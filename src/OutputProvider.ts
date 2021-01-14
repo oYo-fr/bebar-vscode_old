@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import { BebarNodeProvider } from "./bebarNodeProvider";
-import { Logger } from "./Logger";
 
 export class OutputProvider implements vscode.TextDocumentContentProvider {
   public static readonly instance: OutputProvider = new OutputProvider();
@@ -16,7 +15,11 @@ export class OutputProvider implements vscode.TextDocumentContentProvider {
   }
 
   public async refresh(): Promise<void> {
-    if (this.bebarNodeProvider) {
+    if (
+      this.bebarNodeProvider &&
+      this.bebarNodeProvider.bebarParser.bebar &&
+      this.bebarNodeProvider.bebarParser.bebar.outputs
+    ) {
       await Promise.all(
         this.bebarNodeProvider.bebarParser.bebar.outputs.map(
           (o: { file: string }) =>
@@ -30,7 +33,11 @@ export class OutputProvider implements vscode.TextDocumentContentProvider {
     uri: vscode.Uri,
     token: vscode.CancellationToken
   ): vscode.ProviderResult<string> {
-    if (this.bebarNodeProvider && this.bebarNodeProvider.bebarParser.bebar) {
+    if (
+      this.bebarNodeProvider &&
+      this.bebarNodeProvider.bebarParser.bebar &&
+      this.bebarNodeProvider.bebarParser.bebar.outputs
+    ) {
       for (
         let i = 0;
         i < this.bebarNodeProvider.bebarParser.bebar.outputs.length;

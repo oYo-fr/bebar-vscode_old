@@ -47,7 +47,7 @@ export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
   }
 
   public async getRoot(filter: string = ""): Promise<BebarNode[]> {
-    if (!this.bebarParser.bebar) {
+    if (!this.bebarParser || !this.bebarParser.bebar) {
       return [];
     }
     switch (filter) {
@@ -113,43 +113,10 @@ export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
 
   async getChildren(element?: BebarNode): Promise<BebarNode[]> {
     if (!element) {
-      if (this.bebarParser.bebar) {
+      if (this.bebarParser && this.bebarParser.bebar) {
         return Promise.resolve(await this.getRoot());
-        // return Promise.resolve([
-        //   new BebarDataListNode(
-        //     this.bebarParser.bebar.data,
-        //     this.bebarParser.bebar
-        //   ),
-        //   new BebarHelpersNode(
-        //     this.bebarParser.bebar.helpers,
-        //     this.bebarParser.bebar
-        //   ),
-        //   new BebarPartialsNode(
-        //     this.bebarParser.bebar.partials,
-        //     this.bebarParser.bebar
-        //   ),
-        //   new BebarTemplatesNode(
-        //     this.bebarParser.bebar.templates,
-        //     this.bebarParser.bebar
-        //   ),
-        //   new BebarNextListNode(
-        //     this.bebarParser.bebar.nextBebars,
-        //     this.bebarParser.bebar
-        //   ),
-        //   new BebarOutputsNode(
-        //     this.bebarParser.bebar.outputs,
-        //     this.bebarParser.bebar
-        //   ),
-        // ]);
       } else {
-        return Promise.resolve([
-          new BebarNode(
-            "Loading...",
-            this.bebarParser,
-            this.bebarParser.bebar,
-            vscode.TreeItemCollapsibleState.None
-          ),
-        ]);
+        return Promise.resolve([]);
       }
     } else {
       const children = element.getChildren();

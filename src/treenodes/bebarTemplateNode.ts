@@ -1,7 +1,6 @@
 import { Bebar, Datafile, Template } from "bebar";
 import { BebarNode } from "./BebarNode";
 import * as vscode from "vscode";
-import * as path from "path";
 import { BebarDataListNode } from "./BebarDataListNode";
 import { BebarOutputNode } from "./BebarOutputNode";
 import { BebarFileNode } from "./bebarFileNode";
@@ -21,27 +20,6 @@ export class BebarTemplateNode extends BebarNode {
     );
   }
 
-  iconPath = {
-    light: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "light",
-      "templateFile.svg"
-    ),
-    dark: path.join(
-      __filename,
-      "..",
-      "..",
-      "..",
-      "resources",
-      "dark",
-      "templateFile.svg"
-    ),
-  };
-
   getChildren(): BebarNode[] {
     const result: BebarNode[] = [];
     if (this.context.file !== ".") {
@@ -51,26 +29,6 @@ export class BebarTemplateNode extends BebarNode {
         this.context.out,
         this.bebar
       );
-      fileNode.iconPath = {
-        light: path.join(
-          __filename,
-          "..",
-          "..",
-          "..",
-          "resources",
-          "light",
-          "templateFile.svg"
-        ),
-        dark: path.join(
-          __filename,
-          "..",
-          "..",
-          "..",
-          "resources",
-          "dark",
-          "templateFile.svg"
-        ),
-      };
       result.push(fileNode);
     }
     result.push(new BebarOutputNode(this.context.out, this.bebar, "Output: "));

@@ -17,8 +17,8 @@ export class OutputProvider implements vscode.TextDocumentContentProvider {
   public async refresh(): Promise<void> {
     if (
       this.bebarNodeProvider &&
-      this.bebarNodeProvider.bebarParser.bebar &&
-      this.bebarNodeProvider.bebarParser.bebar.outputs
+      this.bebarNodeProvider.bebarParser?.bebar &&
+      this.bebarNodeProvider.bebarParser?.bebar.outputs
     ) {
       await Promise.all(
         this.bebarNodeProvider.bebarParser.bebar.outputs.map(
@@ -35,7 +35,7 @@ export class OutputProvider implements vscode.TextDocumentContentProvider {
   ): vscode.ProviderResult<string> {
     if (
       this.bebarNodeProvider &&
-      this.bebarNodeProvider.bebarParser.bebar &&
+      this.bebarNodeProvider.bebarParser?.bebar &&
       this.bebarNodeProvider.bebarParser.bebar.outputs
     ) {
       for (

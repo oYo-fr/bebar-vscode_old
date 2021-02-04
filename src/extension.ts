@@ -31,6 +31,14 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
+  vscode.commands.registerCommand("bebar.run", async () => {
+    try {
+      await bebarExplorer.run();
+    } catch (e) {
+      vscode.window.showErrorMessage(e);
+    }
+  });
+
   context.subscriptions.push(
     vscode.workspace.onDidChangeTextDocument(async (event) => {
       if (

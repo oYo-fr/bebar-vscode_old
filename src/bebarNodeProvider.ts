@@ -8,6 +8,7 @@ import { BebarPartialsNode } from "./treenodes/BebarPartialsNode";
 import { BebarTemplatesNode } from "./treenodes/bebarTemplatesNode";
 import { BebarNextListNode } from "./treenodes/bebarNextListNode";
 import { BebarOutputsNode } from "./treenodes/bebarOutputsNode";
+import * as fs from "fs";
 
 export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
   private _onDidChangeTreeData: vscode.EventEmitter<
@@ -17,8 +18,40 @@ export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
     BebarNode | undefined | void
   > = this._onDidChangeTreeData.event;
 
-  bebarParser: any;
+  bebarParser: BebarParser | undefined;
+
   constructor() {}
+
+  createDirectory(uri: vscode.Uri): void | Thenable<void> {
+    return;
+  }
+
+  readFile(uri: vscode.Uri): Uint8Array | Thenable<Uint8Array> {
+    return new Uint8Array();
+  }
+
+  writeFile(
+    uri: vscode.Uri,
+    content: Uint8Array,
+    options: { create: boolean; overwrite: boolean }
+  ): void | Thenable<void> {
+    return;
+  }
+
+  delete(
+    uri: vscode.Uri,
+    options: { recursive: boolean }
+  ): void | Thenable<void> {
+    return;
+  }
+
+  rename(
+    oldUri: vscode.Uri,
+    newUri: vscode.Uri,
+    options: { overwrite: boolean }
+  ): void | Thenable<void> {
+    return;
+  }
 
   public async load(file: vscode.Uri) {
     if (file) {
@@ -30,10 +63,14 @@ export class BebarNodeProvider implements vscode.TreeDataProvider<BebarNode> {
     }
   }
 
+  public async run(file: vscode.Uri) {
+    await this.bebarParser?.WriteAll();
+  }
+
   async refresh(): Promise<void> {
-    await this.bebarParser.Load();
+    await this.bebarParser?.Load();
     this._onDidChangeTreeData.fire();
-    await this.bebarParser.Build();
+    await this.bebarParser?.Build();
     this._onDidChangeTreeData.fire();
   }
 

@@ -3,7 +3,7 @@
 	"displayName": "bebar",
 	"publisher": "oYo-fr",
 	"description": "",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/oYo-fr/bebar-vscode"
@@ -26,6 +26,14 @@
 				"icon": {
 					"light": "resources/light/folder.svg",
 					"dark": "resources/dark/folder.svg"
+				}
+			},
+			{
+				"command": "bebar.run",
+				"title": "Run!",
+				"icon": {
+					"light": "resources/light/play.svg",
+					"dark": "resources/dark/play.svg"
 				}
 			}
 		],
@@ -50,37 +58,55 @@
 					"id": "bebarExplorer-outputs",
 					"name": "Outputs",
 					"contextualTitle": "Outputs",
-					"visibility": "visible"
+					"visibility": "visible",
+					"when": "velcomeView:fileOpened"
 				},
 				{
 					"id": "bebarExplorer-templates",
 					"name": "Templates",
 					"contextualTitle": "Templates",
-					"visibility": "visible"
+					"visibility": "visible",
+					"when": "velcomeView:fileOpened"
 				},
 				{
 					"id": "bebarExplorer-data",
 					"name": " Data",
 					"contextualTitle": "Data",
-					"visibility": "visible"
+					"visibility": "visible",
+					"when": "velcomeView:fileOpened"
 				},
 				{
 					"id": "bebarExplorer-partials",
 					"name": "Partials",
-					"contextualTitle": "Partials"
+					"contextualTitle": "Partials",
+					"when": "velcomeView:fileOpened"
 				},
 				{
 					"id": "bebarExplorer-helpers",
 					"name": "Helpers",
-					"contextualTitle": "Helpers"
+					"contextualTitle": "Helpers",
+					"when": "velcomeView:fileOpened"
 				},
 				{
 					"id": "bebarExplorer-next",
 					"name": "Next bebars",
-					"contextualTitle": "Next bebars"
+					"contextualTitle": "Next bebars",
+					"when": "velcomeView:fileOpened"
 				}
 			]
 		},
+		"viewsWelcome": [
+			{
+				"view": "bebarExplorer",
+				"contents": "[Open a Bebar file](command:bebar.open)\nWant to know the cool stuff you can do with Bebar? [Check-out the documentation 💡](https://www.npmjs.com/package/bebar/).",
+				"when": "!velcomeView:fileOpened"
+			},
+			{
+				"view": "bebarExplorer",
+				"contents": "[Run 💾](command:bebar.run)\nWant to know the cool stuff you can do with Bebar? [Check-out the documentation 💡](https://www.npmjs.com/package/bebar/).",
+				"when": "velcomeView:fileOpened"
+			}
+		],
 		"menus": {
 			"view/title": [
 				{

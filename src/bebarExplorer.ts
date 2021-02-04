@@ -17,16 +17,11 @@ export class BebarExplorer {
     this.treeDataProvider = new BebarNodeProvider();
     this.dataProvider = this.treeDataProvider;
 
-    context.subscriptions.push(
-      vscode.window.createTreeView("bebarExplorer", {
-        treeDataProvider: this.treeDataProvider,
-      })
+    vscode.commands.executeCommand(
+      "setContext",
+      "velcomeView:fileOpened",
+      false
     );
-    // context.subscriptions.push(
-    //   vscode.window.createTreeView("bebarExplorer-outputs", {
-    //     treeDataProvider: this.outputsBebarFilteredNodeProvider,
-    //   })
-    // );
 
     this.outputsBebarFilteredNodeProvider = new BebarFilteredNodeProvider(
       this.treeDataProvider,
@@ -100,12 +95,27 @@ export class BebarExplorer {
   public async load(file: vscode.Uri) {
     try {
       await this.treeDataProvider.load(file);
-      await this.treeDataProvider.bebarParser.Load();
-      await this.treeDataProvider.bebarParser.Build();
+      await this.treeDataProvider.bebarParser?.Load();
+      await this.treeDataProvider.bebarParser?.Build();
+
+      vscode.commands.executeCommand(
+        "setContext",
+        "velcomeView:fileOpened",
+        true
+      );
     } catch (e) {
       vscode.window.showErrorMessage(e);
     }
   }
+
+  public async run() {
+    try {
+      await this.treeDataProvider.bebarParser?.WriteAll();
+    } catch (e) {
+      vscode.window.showErrorMessage(e);
+    }
+  }
+
   async refresh() {
     await this.treeDataProvider.refreshView();
     await this.outputsBebarFilteredNodeProvider.refreshView();
